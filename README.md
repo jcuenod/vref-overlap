@@ -22,7 +22,9 @@ The premise is that, given a similarity function, we can compare the similarity 
 
 In this case, we can see that sentences 1 and 2 are very similar, while sentence 4 is quite dissimilar from the rest. This is the basic idea behind the overlap detection algorithm. We compare the similarity of all documents in a collection, triangulating the ones that are "unexpectedly" similar.
 
-We are not evaluating a single sentence but a collection of verses. To aggregate this information across verses, we calculate the mean similarity and the standard deviation for each verse and report overlaps when the similarity is more than some threshold above the mean similarity. This means that it is more accurate for larger collections of documents. But the more documents, the longer the processing time. By default the threshold is 2 standard deviations, but this "scale factor" can be adjusted.
+We are not evaluating a single sentence but a collection of verses. To aggregate this information across verses, we calculate the mean similarity and the standard deviation for each verse, and we report overlaps when the similarity is more than some threshold above the mean similarity. This means that it is more accurate for larger collections of documents. But the more documents, the longer the processing time.
+
+By default the threshold for reporting overlaps is 2 standard deviations above the mean, but this "scale factor" can be adjusted.
 
 There are two similarity functions, but more can easily be added (feel free to submit a PR!):
 
@@ -37,16 +39,16 @@ Using metric: tfidf
 Reading files: ['en-CSB.txt', 'en-NIV.txt', 'en-BSB.txt', 'en-ESV.txt', 'en-NLT.txt']
 Comparing verses...
 100%|███████████████████████████████████████████████████████████████████████████| 41899/41899 [00:41<00:00, 1012.74it/s]
-en-NIV.txt <=> en-BSB.txt: 929
-en-CSB.txt <=> en-BSB.txt: 301
-en-BSB.txt <=> en-ESV.txt: 134
-en-CSB.txt <=> en-ESV.txt: 114
-en-CSB.txt <=> en-NIV.txt: 101
-en-NIV.txt <=> en-ESV.txt: 51
-en-BSB.txt <=> en-NLT.txt: 31
-en-NIV.txt <=> en-NLT.txt: 20
-en-CSB.txt <=> en-NLT.txt: 13
-en-ESV.txt <=> en-NLT.txt: 5
+en-NIV.txt <=> en-BSB.txt: 1098
+en-CSB.txt <=> en-BSB.txt: 286
+en-CSB.txt <=> en-ESV.txt: 110
+en-ESV.txt <=> en-BSB.txt: 100
+en-CSB.txt <=> en-NIV.txt: 88
+en-NIV.txt <=> en-ESV.txt: 45
+en-NLT.txt <=> en-BSB.txt: 29
+en-NIV.txt <=> en-NLT.txt: 28
+en-CSB.txt <=> en-NLT.txt: 14
+en-ESV.txt <=> en-NLT.txt: 4
 Conducted comparisons on 3336 verses.
 ```
 
@@ -58,14 +60,14 @@ Using metric: sequence
 Reading files: ['en-CSB.txt', 'en-NIV.txt', 'en-BSB.txt', 'en-ESV.txt', 'en-NLT.txt']
 Comparing verses...
 100%|███████████████████████████████████████████████████████████████████████████| 41899/41899 [00:08<00:00, 5215.25it/s]
-en-NIV.txt <=> en-BSB.txt: 300
-en-CSB.txt <=> en-BSB.txt: 107
-en-BSB.txt <=> en-ESV.txt: 39
-en-CSB.txt <=> en-ESV.txt: 33
-en-CSB.txt <=> en-NIV.txt: 21
-en-NIV.txt <=> en-ESV.txt: 15
-en-BSB.txt <=> en-NLT.txt: 13
-en-NIV.txt <=> en-NLT.txt: 11
+en-NIV.txt <=> en-BSB.txt: 370
+en-CSB.txt <=> en-BSB.txt: 98
+en-CSB.txt <=> en-ESV.txt: 36
+en-ESV.txt <=> en-BSB.txt: 23
+en-CSB.txt <=> en-NIV.txt: 18
+en-NIV.txt <=> en-ESV.txt: 13
+en-NLT.txt <=> en-BSB.txt: 13
+en-NIV.txt <=> en-NLT.txt: 8
 en-CSB.txt <=> en-NLT.txt: 2
 Conducted comparisons on 3336 verses.
 ```
